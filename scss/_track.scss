@@ -1,0 +1,36 @@
+
+.item {
+	background-color:#DFDFDF;
+}
+
+.track {
+	display: flex;
+	align-items: center;
+
+
+	.track__bg {
+		position: absolute;
+		top: 0;
+		height: 100%;
+		left: 0;
+		z-index: -1;		
+	}
+
+	.track__container {
+		flex: 1;
+		padding: 0 20px;
+		white-space: normal;
+
+	}
+	.track__title {
+		font-size: 23px;
+		font-weight: bold;
+	}
+
+	.track__username {
+		color: #AAA;
+
+	}
+
+}
+
