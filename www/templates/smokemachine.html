@@ -5,9 +5,8 @@
       <ion-item collection-repeat="track in tracks"
         collection-item-width="'100%'"
         collection-item-height="134"
-        class='item-list'>
-
-
+        class='item-list'
+        ng-click="resultClick(track)">
         <sc-track track="track"></sc-track>
       </ion-item>
     </ion-list>
