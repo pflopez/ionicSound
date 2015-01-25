@@ -35,15 +35,28 @@ angular.module('starter.controllers', [])
 
 .controller('PlaylistsCtrl', [ '$scope' , 'SoundCloudService' , '$ionicLoading' , function($scope, SoundCloudService , $ionicLoading) {
 
+  var idle = true;
+
   $ionicLoading.show({
     template: 'Loading...'
   });
   
-  SoundCloudService.getTracksByGenre('rock').then(function(tracks){
-    $ionicLoading.hide();
-    console.log(tracks[0]);
-    $scope.tracks = tracks;
-  });
+
+
+  $scope.loadMore = function (){
+    if(idle){
+      idle = false;
+      console.log('it is idle, go!');
+      SoundCloudService.getNextPage().then(function(tracks){
+        $scope.tracks = $scope.tracks ? $scope.tracks.concat(tracks) : tracks;
+        $ionicLoading.hide();
+        idle = true;
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+      });  
+    }
+  }
+
+
 }])
 
 .controller('PlaylistCtrl', ['$scope', '$stateParams' , function($scope, $stateParams) {

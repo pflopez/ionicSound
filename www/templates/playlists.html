@@ -2,7 +2,12 @@
   <ion-content>
 
    <ion-list>
-      <ion-item ng-repeat="track in tracks">
+      <ion-item collection-repeat="track in tracks"
+        collection-item-width="'100%'"
+        collection-item-height="134"
+        class='item-list'>
+
+
         <sc-track track="track"></sc-track>
       </ion-item>
     </ion-list>
@@ -13,5 +18,13 @@
         {{playlist.title}}
       </ion-item>
     </ion-list> -->
+   <ion-infinite-scroll
+    on-infinite="loadMore()"
+    distance="10%"
+    icon="ion-loading-c"
+    class="scroll-loading">
+
+  </ion-infinite-scroll>
+
   </ion-content>
 </ion-view>

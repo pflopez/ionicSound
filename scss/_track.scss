@@ -1,23 +1,25 @@
-
-.item {
-	background-color:#DFDFDF;
+.item-list {
+	width: 100%;
+	height: 134px;
 }
 
+
+
 .track {
-	display: flex;
+	@include display-flex;
 
 
 
-	.track__bg {
-		position: absolute;
-		top: 0;
-		height: 100%;
-		left: 0;
-		z-index: -1;		
-	}
+		// .track__bg {
+		// 	position: absolute;
+		// 	top: 0;
+		// 	height: 100%;
+		// 	left: 0;
+		// 	z-index: -1;		
+		// }
 
 	.track__container {
-		flex: 1;
+		@include flex(1);
 		padding: 0 20px;
 		white-space: normal;
 
@@ -32,10 +34,13 @@
 
 	}
 	.track__img {
-		width: 100px;
-		height: 100px;
+		width: 50px;
+		height: 50px;
 		background-color: #ddd;
 	}
 
 }
 
+.scroll-loading {
+	z-index: 10;
+}

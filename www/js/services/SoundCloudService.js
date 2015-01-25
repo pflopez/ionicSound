@@ -1,9 +1,14 @@
 angular.module('starter.services', []).
 factory('SoundCloudService', ['$http', '$q','$window', function($http, $q, win) {
 
+	var PAGE_SIZE= 100,
+		PAGE_NUM = 0;
+
+
 	return {
 		getTracksByGenre: getTracksByGenre,
-		getTracks : getTracks 
+		getTracks : getTracks ,
+		getNextPage: getNextPage
 	}
 
 	function getClientId(){
@@ -20,12 +25,32 @@ factory('SoundCloudService', ['$http', '$q','$window', function($http, $q, win) 
             url: 'http://api.soundcloud.com/tracks.json',
             params: { 
             	client_id : getClientId(),
-            	genre: genre
+            	genre: genre,
+            	limit: PAGE_SIZE
             }
         }).success(function(data){
         	deferred.resolve(data);
         })
 		return deferred.promise;
+	}
+
+	function getNextPage(){
+		PAGE_NUM = PAGE_NUM + 1;
+
+		var deferred = $q.defer();
+				$http({
+		            method: 'GET',
+		            url: 'http://api.soundcloud.com/tracks.json',
+		            params: { 
+		            	client_id : getClientId(),
+		            	genre: 'rock',
+		            	limit: PAGE_SIZE,
+		            	offset: (PAGE_SIZE * PAGE_NUM)
+		            }
+		        }).success(function(data){
+		        	deferred.resolve(data);
+		        })
+				return deferred.promise;
 	}
 
 	/**
