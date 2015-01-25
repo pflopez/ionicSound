@@ -35,6 +35,10 @@ $dark:                            #444 !default;
     font-weight: bold; }
   .track .track__username {
     color: #AAA; }
+  .track .track__img {
+    width: 100px;
+    height: 100px;
+    background-color: #ddd; }
 
 /*!
   Ionicons, v1.5.2

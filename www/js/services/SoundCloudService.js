@@ -1,58 +1,67 @@
 angular.module('starter.services', []).
-factory('SoundCloudService', ['$q','$window', function($q, win) {
+factory('SoundCloudService', ['$http', '$q','$window', function($http, $q, win) {
 
 	return {
-		init: init,
-		test: test,
-		getTracks: getTracks
+		getTracksByGenre: getTracksByGenre,
+		getTracks : getTracks 
 	}
 
-	function init() {
-	  SC.initialize({
-	    client_id: "a3c640eb93a579e2fb97438a287aff52"
-	    //redirect_uri: "http://example.com/callback.html",
-	  });
-
-
-		
+	function getClientId(){
+		return 'a3c640eb93a579e2fb97438a287aff52';
 	}
 
-	function test () {
+
+
+	function getTracksByGenre(genre) {
+ 		
 		var deferred = $q.defer();
-
-
-        
-
-      	SC.get("/groups/55517/tracks", {limit: 1}, function(tracks){
-		  deferred.resolve(tracks);
-		});
-        
-        //  deferred.reject(result.error);
-        
-		return deferred.promise;
-		// body...
-		//return SC.get("/groups/55517/tracks", {limit: 1}, cb);
-
-	}
-
-	function getTracks(genre , bpm) {
-		var deferred = $q.defer();
-		SC.get('/tracks', { genres: genre, bpm: { from: 120 } }, function(tracks) {
-		  deferred.resolve(tracks);
-		});
+		$http({
+            method: 'GET',
+            url: 'http://api.soundcloud.com/tracks.json',
+            params: { 
+            	client_id : getClientId(),
+            	genre: genre
+            }
+        }).success(function(data){
+        	deferred.resolve(data);
+        })
 		return deferred.promise;
 	}
 
+	/**
+	
+	Gets track 
+	@param {Object} options Filter options
 
-
-
-   // var msgs = [];	
-   // return function(msg) {
-   //   msgs.push(msg);
-   //   if (msgs.length == 3) {
-   //     win.alert(msgs.join("\n"));
-   //     msgs = [];
-   //   }
-   // };
+	Parameter			Type			Description
+	q					string			a string to search for (see search documentation)
+	tags				list			a comma separated list of tags
+	filter				enumeration		(all,public,private)
+	license				enumeration		Filter on license. (see license attribute)
+	bpm[from]			number			return tracks with at least this bpm value
+	bpm[to]				number			return tracks with at most this bpm value
+	duration[from]		number			return tracks with at least this duration (in millis)
+	duration[to]		number			return tracks with at most this duration (in millis)
+	created_at[from]	date			(yyyy-mm-dd hh:mm:ss) return tracks created at this date or later
+	created_at[to]		date			(yyyy-mm-dd hh:mm:ss) return tracks created at this date or earlier
+	ids					list			a comma separated list of track ids to filter on
+	genres				list			a comma separated list of genres
+	types				enumeration		a comma separated list of types
+	*/
+	function getTracks(options) {
+ 		
+		var deferred = $q.defer();
+		$http({
+            method: 'GET',
+            url: 'http://api.soundcloud.com/tracks.json',
+            params: { 
+            	client_id : getClientId(),
+            	genre: genre
+            }
+        }).success(function(data){
+        	deferred.resolve(data);
+        })
+		return deferred.promise;
+	}
  }]);
 

@@ -38,8 +38,8 @@ angular.module('starter.controllers', [])
   $ionicLoading.show({
     template: 'Loading...'
   });
-  SoundCloudService.init();
-  SoundCloudService.getTracks('rock').then(function(tracks){
+  
+  SoundCloudService.getTracksByGenre('rock').then(function(tracks){
     $ionicLoading.hide();
     console.log(tracks[0]);
     $scope.tracks = tracks;
