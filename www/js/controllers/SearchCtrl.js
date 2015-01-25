@@ -1,16 +1,40 @@
 angular.module('starter')
-.controller('SearchCtrl', ['$scope', '$ionicLoading', 'SoundCloudQuery',function($scope,$ionicLoading, SoundCloudQuery) {
+.controller('SearchCtrl', 
+				['$scope', '$ionicLoading', 'SoundCloudQuery', '$ionicModal', '$moment',
+function( $scope,   $ionicLoading,   SoundCloudQuery,   $ionicModal,   $moment) {
 	var idle 	= false;
 	var query;
+	//init the controller
 	init();
 	
 	function init(){
-		console.log('init');
+
 		$scope.query = {};
 		$scope.endOfRecords = false;
 		$scope.hasSearchResults = false;
+
+			  // Create the login modal that we will use later
+	  $ionicModal.fromTemplateUrl('templates/info.html', {
+	    scope: $scope
+	  }).then(function(modal) {
+	    $scope.modal = modal;
+	  });
+
+
 	}
 
+	$scope.resultClick = function(result){
+		$scope.info = result;
+
+		result.big_artwork = result.artwork_url.replace('large', 't500x500');
+		result.proper_time = $moment.utc(result.duration).format("HH:mm:ss");
+
+		$scope.modal.show();
+	}
+
+	$scope.closeModal = function(){
+		$scope.modal.hide();	
+	}
 
 
 	$scope.clearQuery = function(){

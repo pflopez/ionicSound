@@ -7015,12 +7015,25 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+/**
+ * font
+ */
 @font-face {
   font-family: 'Roboto Slab';
   font-style: normal;
   font-weight: 400;
   src: local('Roboto Slab Regular'), local('RobotoSlab-Regular'), url(../fonts/roboto.woff) format('woff'); }
 
+body {
+  font-family: 'Roboto Slab', serif; }
+
+.bar .title {
+  font-family: 'Roboto Slab', serif;
+  font-weight: bold; }
+
+/*
+directives
+ */
 .item-list {
   width: 100%;
   height: 134px;
@@ -7051,20 +7064,6 @@ a.button {
     height: 100px;
     background-color: #ddd; }
 
-.scroll-loading {
-  z-index: 10; }
-
-body {
-  font-family: 'Roboto Slab', serif; }
-
-.bar .title {
-  font-family: 'Roboto Slab', serif;
-  font-weight: bold; }
-
-.highjack {
-  width: 100%;
-  display: flex; }
-
 .delete-query {
   position: absolute;
   right: 59px; }
@@ -7092,3 +7091,10 @@ body {
 
 .container {
   padding: 20px 10px; }
+
+.result .track-bg-container {
+  position: absolute;
+  z-index: -1;
+  width: 100%; }
+.result .track-bg-container__bg {
+  width: 100%; }
