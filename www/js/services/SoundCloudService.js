@@ -1,14 +1,11 @@
-angular.module('starter.services', []).
+angular.module('starter').
 factory('SoundCloudService', ['$http', '$q','$window', function($http, $q, win) {
 
-	var PAGE_SIZE= 100,
-		PAGE_NUM = 0;
 
 
 	return {
-		getTracksByGenre: getTracksByGenre,
 		getTracks : getTracks ,
-		getNextPage: getNextPage
+		getTracksByUser: getTracksByUser
 	}
 
 	function getClientId(){
@@ -16,42 +13,6 @@ factory('SoundCloudService', ['$http', '$q','$window', function($http, $q, win) 
 	}
 
 
-
-	function getTracksByGenre(genre) {
- 		
-		var deferred = $q.defer();
-		$http({
-            method: 'GET',
-            url: 'http://api.soundcloud.com/tracks.json',
-            params: { 
-            	client_id : getClientId(),
-            	genre: genre,
-            	limit: PAGE_SIZE
-            }
-        }).success(function(data){
-        	deferred.resolve(data);
-        })
-		return deferred.promise;
-	}
-
-	function getNextPage(){
-		PAGE_NUM = PAGE_NUM + 1;
-
-		var deferred = $q.defer();
-				$http({
-		            method: 'GET',
-		            url: 'http://api.soundcloud.com/tracks.json',
-		            params: { 
-		            	client_id : getClientId(),
-		            	genre: 'rock',
-		            	limit: PAGE_SIZE,
-		            	offset: (PAGE_SIZE * PAGE_NUM)
-		            }
-		        }).success(function(data){
-		        	deferred.resolve(data);
-		        })
-				return deferred.promise;
-	}
 
 	/**
 	
@@ -74,19 +35,38 @@ factory('SoundCloudService', ['$http', '$q','$window', function($http, $q, win) 
 	types				enumeration		a comma separated list of types
 	*/
 	function getTracks(options) {
+
+		options = options || {};
+		options.client_id = getClientId();
  		
 		var deferred = $q.defer();
 		$http({
             method: 'GET',
             url: 'http://api.soundcloud.com/tracks.json',
-            params: { 
-            	client_id : getClientId(),
-            	genre: genre
-            }
+            params: options
         }).success(function(data){
         	deferred.resolve(data);
         })
 		return deferred.promise;
 	}
+
+	function getTracksByUser(options){
+		options = options || {};
+		options.client_id = getClientId();
+ 		
+		var deferred = $q.defer();
+		$http({
+            method: 'GET',
+            url: 'http://api.soundcloud.com/users/'+ options.user +'/tracks.json',
+            params: options
+        }).success(function(data){
+        	deferred.resolve(data);
+        })
+		return deferred.promise;
+	}
+
+
+
+
  }]);
 

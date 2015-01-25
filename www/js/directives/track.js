@@ -1,5 +1,5 @@
 
-angular.module('starter.directives', [])
+angular.module('starter')
 .directive('scTrack', function() {
   return {
     restrict: 'E',
