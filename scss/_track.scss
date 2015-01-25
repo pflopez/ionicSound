@@ -25,6 +25,7 @@
 	}
 	.track__img {
 		width: 100px;
+
 		height: 100px;
 		background-color: #ddd;
 	}
@@ -51,4 +52,27 @@ font-weight:bold;
 .delete-query {
 	position: absolute;
 	right: 59px;
+}
+
+
+
+.browse {
+	@include display-flex;
+	@include flex-wrap(wrap);
+	padding-top:20px;
+
+	.tag-item {
+		margin: 5px;
+		font-size: 18px;
+		background-color: #F0F0F0;
+		padding: 15px 25px;
+		flex-shrink: 0;
+		flex-grow: 1;
+		text-align: center;
+
+	}
+}
+
+.container {
+	padding: 20px 10px;
 }
