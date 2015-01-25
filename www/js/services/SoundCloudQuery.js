@@ -3,7 +3,7 @@ factory('SoundCloudQuery',
         ['SoundCloudService', '$q', 
 function( SoundCloudService ,  $q ) {
 
-	var PAGE_SIZE= 100,
+	var PAGE_SIZE= 20,
   PAGE_NUM = 0;
 
 

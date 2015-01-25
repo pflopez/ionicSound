@@ -2,21 +2,51 @@ describe("SoundCloudService", function() {
 
 	
 
-	var $scope, SoundCloudService;
+	var $scope, $httpBackend, SoundCloudService;
 	beforeEach(function(){
-		module('starter');	
 		module('ngMock');	
-		inject(function($rootScope, _SoundCloudService_) {
-	    $scope = $rootScope.$new();    
+		module('starter');	
+
+		inject(function(_$rootScope_, _$httpBackend_ ,_SoundCloudService_) {
+	    $scope = _$rootScope_.$new();    
 	    SoundCloudService = _SoundCloudService_;
+
+	    $httpBackend = _$httpBackend_;
+	    
+	    $httpBackend.when('GET', 'http://api.soundcloud.com/tracks.json').respond({userId: 'userX'}, {'A-Token': 'xxx'});
 		});
 	});
 	
-	
-  it("contains spec with an expectation", function() {
-    expect(true).toBe(true);
+	describe('getTracks', function(){
+		
+		it("should have a method getTracks", function() {
+		    expect(SoundCloudService.getTracks).toBeDefined();
+ 		});
 
-  });
+ 		it("should recieve options as a parameter", function() {
+		    spyOn(SoundCloudService, 'getTracks');
+				SoundCloudService.getTracks({ foo: 'bar'});
+		    expect( SoundCloudService.getTracks ).toHaveBeenCalledWith({ foo: 'bar'});
+ 		});
+
+ 		it("should recieve options as a parameter", function() {
+		    
+				var d = SoundCloudService.getTracks({ foo: 'bar'});
+				console.log(d);
+		    
+ 		});
+
+ 		
+
+
+	});
+  
+  describe('getTracksByUser', function(){
+		
+		it("should have a method getTracksByUser", function() {
+		    expect(SoundCloudService.getTracks).toBeDefined();
+ 		});
+	});
 
 
   // must return error if params missing
