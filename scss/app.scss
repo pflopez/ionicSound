@@ -1,6 +1,24 @@
+/**
+ * font
+ */
 @font-face {
   font-family: 'Roboto Slab';
   font-style: normal;
   font-weight: 400;
   src: local('Roboto Slab Regular'), local('RobotoSlab-Regular'), url(../fonts/roboto.woff) format('woff');
 }
+
+body {
+	font-family: 'Roboto Slab', serif;
+}
+
+.bar .title {
+font-family: 'Roboto Slab', serif;
+font-weight:bold;	
+}
+
+
+/*
+directives
+ */
+@import "track";

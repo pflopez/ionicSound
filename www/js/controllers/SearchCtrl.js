@@ -22,13 +22,11 @@ angular.module('starter')
 	 */
 	$scope.search = function(){
 		$ionicLoading.show();
-		console.log($scope);
 	  query =  SoundCloudQuery.query({q:$scope.query.value});
 		query.getNextPage().then(function(results){
 			$scope.results =  results;
   		$ionicLoading.hide();
-
-    	if(results > 0){
+    	if(results.length > 0){
   			$scope.hasSearchResults = true;
 				enableScroll();	
 			}else{
@@ -47,7 +45,7 @@ angular.module('starter')
 			idle = false;
 			query.getNextPage().then(function(results){
 				$scope.results = $scope.results ? $scope.results.concat(results) : results;
-				if(results > 0){
+				if(results.length > 0){
 					enableScroll();	
 				}else{
 					$scope.hasSearchResults = false;
