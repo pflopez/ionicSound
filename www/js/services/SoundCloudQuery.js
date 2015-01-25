@@ -6,17 +6,19 @@ factory('SoundCloudQuery', ['SoundCloudService', '$q', function(SoundCloudServic
 
 	function Query(options){
 		this.options 	= options;
-		this.user 		= options.user;
 		this.serviceCall = options.serviceCall;
-	}
+	};
+
   	
   	Query.prototype.getNextPage = function() {
 	 	var params  = { 
     		limit: PAGE_SIZE,
         	offset: (PAGE_SIZE * PAGE_NUM),
-        	user: this.user
+        	user: this.options.user
         }
-		return this.serviceCall(params);
+        console.log(this.options);
+
+		return this.serviceCall(angular.extend({},this.options,params));
   	};
 
   	function newQuery (options) {

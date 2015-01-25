@@ -1,0 +1,5 @@
+- endOfRecords infinite scroll 
+- titlebar fije en search
+- typeahead
+- DetailView (3 niveles)
+- tests

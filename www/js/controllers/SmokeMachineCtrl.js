@@ -1,5 +1,5 @@
 angular.module('starter')
-.controller('PlaylistsCtrl', 
+.controller('SmokeMachineCtrl', 
        [ '$scope', 'SoundCloudService', '$ionicLoading' , 'SoundCloudQuery' , 
 function( $scope,   SoundCloudService ,  $ionicLoading,    SoundCloudQuery) {
 
