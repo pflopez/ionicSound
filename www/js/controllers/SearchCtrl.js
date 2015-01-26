@@ -10,7 +10,6 @@ function( $scope,   $ionicLoading,   SoundCloudQuery,   $ionicModal,   $moment) 
 	function init(){
 
 		$scope.query = {};
-		$scope.endOfRecords = false;
 		$scope.hasSearchResults = false;
 
 			  // Create the login modal that we will use later
@@ -49,10 +48,11 @@ function( $scope,   $ionicLoading,   SoundCloudQuery,   $ionicModal,   $moment) 
 	  query =  SoundCloudQuery.query({q:$scope.query.value});
 		query.getNextPage().then(function(results){
 			$scope.results =  results;
+			$scope.$broadcast('scroll.infiniteScrollComplete');
   		$ionicLoading.hide();
     	if(results.length > 0){
   			$scope.hasSearchResults = true;
-				enableScroll();	
+				idle = true;
 			}else{
 				$scope.hasSearchResults = false;
 			}
@@ -69,25 +69,14 @@ function( $scope,   $ionicLoading,   SoundCloudQuery,   $ionicModal,   $moment) 
 			idle = false;
 			query.getNextPage().then(function(results){
 				$scope.results = $scope.results ? $scope.results.concat(results) : results;
+				$scope.$broadcast('scroll.infiniteScrollComplete');
 				if(results.length > 0){
-					enableScroll();	
+					idle = true;
 				}else{
 					$scope.hasSearchResults = false;
 				}
-				
 			});  
 		}
-	}
-
-	
-	/**
-	 * helper
-	 * @private
-	 * @return {[type]}
-	 */
-	function enableScroll(){
-		idle = true;
-  	$scope.$broadcast('scroll.infiniteScrollComplete');
 	}
 
 }]);

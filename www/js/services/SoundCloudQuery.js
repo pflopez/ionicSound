@@ -3,19 +3,18 @@ factory('SoundCloudQuery',
         ['SoundCloudService', '$q', 
 function( SoundCloudService ,  $q ) {
 
-	var PAGE_SIZE= 20,
-  PAGE_NUM = 0;
-
-
+	var PAGE_SIZE= 50;
 
 
   /**
    * Constructor
    * @param {[type]}
    */
-  function Query(options){
+  function Query(options, serviceCall){
     this.options 	= options;
-    this.serviceCall = options.serviceCall;
+    this.serviceCall = serviceCall;
+    this.pageSize = options.pageSize ? options.pageSize : PAGE_SIZE;
+    this.pageNumber = 0;
   };
 
 
@@ -26,10 +25,12 @@ function( SoundCloudService ,  $q ) {
   Query.prototype.getNextPage = function() {
     //set params
     var params  = { 
-      limit: PAGE_SIZE,
-      offset: (PAGE_SIZE * PAGE_NUM),
+      limit: this.pageSize,
+      offset: (this.pageSize * this.pageNumber),
       user: this.options.user
     }
+    this.pageNumber = this.pageNumber + 1 ;
+      console.log(this.options);
     //call service with params
     return this.serviceCall(angular.extend({},this.options,params));
   };
@@ -42,8 +43,7 @@ function( SoundCloudService ,  $q ) {
    */
   function newQuery (options) {
     options = options || {}; 
-    options.serviceCall = SoundCloudService.getTracks;
-    return new Query(options);
+    return new Query(options, SoundCloudService.getTracks);
   };
 
 
@@ -54,8 +54,7 @@ function( SoundCloudService ,  $q ) {
    */
   function newQueryByUser (options) {
     options = options || {}; 
-    options.serviceCall = SoundCloudService.getTracksByUser;
-    return new Query(options);
+    return new Query(options,  SoundCloudService.getTracksByUser);
   };
 
 

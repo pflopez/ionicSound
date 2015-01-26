@@ -1,15 +1,7 @@
 <ion-view view-title="Browse">
   <ion-content>
-    
-    <div class="container">
-    	<button class="button button-stable" ng-click="getLatestTags()">
-			 	Get latest tags
-			</button>
-    </div>
-
-
     <div class="browse">
-   		<div class="tag-item" ng-repeat="tag in tags">{{tag}}</div>
+   		<button class="tag-item button button-light" ng-repeat="tag in tags">{{tag}}</button>
 		</div>
 
    

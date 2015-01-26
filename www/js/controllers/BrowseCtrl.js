@@ -10,6 +10,16 @@ angular.module('starter')
 		$scope.query = {};
 		$scope.endOfRecords = false;
 		$scope.hasSearchResults = false;
+		
+		$ionicLoading.show();
+
+		
+	  query = SoundCloudQuery.query({});
+		query.getNextPage().then(function(results){
+			$scope.tags =  filterTags(results);;
+		 	$ionicLoading.hide();
+	 	});
+	 	
 	}
 
 	filterTags = function(results){
@@ -33,23 +43,7 @@ angular.module('starter')
 		return cleanTags;
 	}
 
-	$scope.getLatestTags = function() {
-		$ionicLoading.show();
-
-		
-	  query =  SoundCloudQuery.query({});
-		query.getNextPage().then(function(results){
-			 $scope.tags =  filterTags(results);;
-  	 	$ionicLoading.hide();
-
-   //  	if(results > 0){
-  	// 		$scope.hasSearchResults = true;
-			// 	enableScroll();	
-			// }else{
-			// 	$scope.hasSearchResults = false;
-			// }
-  	});  
-	}
+	
 
 
 

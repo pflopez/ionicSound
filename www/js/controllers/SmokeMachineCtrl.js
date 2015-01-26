@@ -10,8 +10,7 @@ function( $scope ,  $ionicLoading  ,  SoundCloudQuery  ,  $ionicModal ,  $moment
   
 
   function init() {
-    $scope.endOfRecords = false;
-    $scope.hasSearchResults = false;
+    $scope.hasSearchResults = true;
 
     $ionicLoading.show({
       template: 'Loading...'
@@ -43,13 +42,23 @@ function( $scope ,  $ionicLoading  ,  SoundCloudQuery  ,  $ionicModal ,  $moment
 
   $scope.loadMore = function (){
     if(idle){
-		idle = false;
-		query.getNextPage().then(function(tracks){
-			$scope.tracks = $scope.tracks ? $scope.tracks.concat(tracks) : tracks;
+		  idle = false;
+      console.log("aca");
+		  query.getNextPage().then(function(tracks){
+			  
+        $scope.tracks = $scope.tracks ? $scope.tracks.concat(tracks) : tracks;
 	    	$ionicLoading.hide();
-	    	idle = true;
-	    	$scope.$broadcast('scroll.infiniteScrollComplete');
-      	});  
+        
+        console.log("aca");
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        
+        if(tracks.length > 0){
+          idle = true;
+        }else{
+          $scope.hasSearchResults = false;
+        }
+
+    	});  
     }
   }
 

@@ -7064,9 +7064,12 @@ directives
     height: 100px;
     background-color: #ddd; }
 
-.delete-query {
+.result .track-bg-container {
   position: absolute;
-  right: 59px; }
+  z-index: -1;
+  width: 100%; }
+.result .track-bg-container__bg {
+  width: 100%; }
 
 .browse {
   display: -webkit-box;
@@ -7078,23 +7081,20 @@ directives
   -webkit-flex-wrap: wrap;
   -moz-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  padding-top: 20px; }
+  flex-wrap: wrap; }
   .browse .tag-item {
     margin: 5px;
     font-size: 18px;
     background-color: #F0F0F0;
-    padding: 15px 25px;
+    padding: 0px 10px;
     flex-shrink: 0;
     flex-grow: 1;
-    text-align: center; }
+    text-align: center;
+    font-family: 'Roboto Slab', serif; }
+
+.delete-query {
+  position: absolute;
+  right: 59px; }
 
 .container {
   padding: 20px 10px; }
-
-.result .track-bg-container {
-  position: absolute;
-  z-index: -1;
-  width: 100%; }
-.result .track-bg-container__bg {
-  width: 100%; }
