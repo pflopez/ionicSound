@@ -13,7 +13,7 @@ function( SoundCloudService ,  $q ) {
   function Query(options, serviceCall){
     this.options 	= options;
     this.serviceCall = serviceCall;
-    this.pageSize = options.pageSize ? options.pageSize : PAGE_SIZE;
+    this.limit = options.limit ? options.limit : PAGE_SIZE;
     this.pageNumber = 0;
   };
 
@@ -25,12 +25,15 @@ function( SoundCloudService ,  $q ) {
   Query.prototype.getNextPage = function() {
     //set params
     var params  = { 
-      limit: this.pageSize,
-      offset: (this.pageSize * this.pageNumber),
-      user: this.options.user
+      limit: this.limit,
+      offset: (this.limit * this.pageNumber),
     }
+    //add user if present
+    if(this.options.user) {
+      params.user = this.options.user
+    }
+    
     this.pageNumber = this.pageNumber + 1 ;
-      console.log(this.options);
     //call service with params
     return this.serviceCall(angular.extend({},this.options,params));
   };

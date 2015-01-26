@@ -18,6 +18,8 @@ module.exports = function(config) {
         'www/lib/ionic/js/ionic.bundle.js',
         'www/lib/loDash/loDash.js',
         'www/lib/angular-mocks/*',
+        "www/lib/moment/moment.js",
+        "www/lib/angular-momentjs/angular-momentjs.js",
         'test/**/',
         'www/js/**/'
     ],
