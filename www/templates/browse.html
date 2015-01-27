@@ -1,9 +1,24 @@
-<ion-view view-title="Browse">
+<ion-view view-title="{{title}}">
   <ion-content>
-    <div class="browse">
-   		<button class="tag-item button button-light" ng-repeat="tag in tags">{{tag}}</button>
+  	<!-- tag buttons -->
+    <div class="browse" ng-if='!showList'>
+   		<button class="tag-item button button-light" ng-repeat="tag in tags"
+					ui-sref="app.browse({tag: tag})">{{tag}}</button>
 		</div>
 
+		<!-- result list (tracks) -->
+		<div ng-if='showList'>
+			<ion-list>
+		  <ion-item collection-repeat="result in results"
+		    	collection-item-width="'100%'"
+		    	collection-item-height="134"
+		    	class='item-list'
+		    	ng-click="resultClick(result)">
+		    <sc-track track="result"></sc-track>
+		  </ion-item>
+		</ion-list>
+		</div>
+		
    
   </ion-content>
 </ion-view>

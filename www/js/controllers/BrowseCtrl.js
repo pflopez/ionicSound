@@ -1,52 +1,76 @@
 angular.module('starter')
-.controller('BrowseCtrl', ['$scope', '$ionicLoading', 'SoundCloudQuery',function($scope,$ionicLoading, SoundCloudQuery) {
+.controller('BrowseCtrl', 
+				['$scope', '$ionicLoading', 'SoundCloudQuery', 'Utils', '$stateParams', '$ionicModal', '$moment',
+function( $scope,   $ionicLoading,   SoundCloudQuery,   Utils ,  $stateParams ,  $ionicModal,   $moment ) {
 	var idle 	= false;
 	var query;
-	init();
-	
-	function init(){
-		console.log('init');
-		$scope.tags = [] ;//['rock', 'metal', 'alternativo', 'funk' , 'jazz' ,'punk' , 'happy' ,'nyc' ]
-		$scope.query = {};
-		$scope.endOfRecords = false;
-		$scope.hasSearchResults = false;
-		
+
+	function prepareModal(){
+ 		$ionicModal.fromTemplateUrl('templates/info.html', {
+	    scope: $scope
+	  }).then(function(modal) {
+	    $scope.modal = modal;
+	  });
+	}
+
+
+	$scope.resultClick = function(result){
+		$scope.info = result;
+
+		result.big_artwork = result.artwork_url ? result.artwork_url.replace('large', 't500x500') : '';
+		result.proper_time = $moment.utc(result.duration).format("HH:mm:ss");
+
+		$scope.modal.show();
+	}
+
+	$scope.closeModal = function(){
+		$scope.modal.hide();
+		//clear info
+		$scope.info = null;	
+	}
+
+	$scope.searchByTag = function(tag){
 		$ionicLoading.show();
+	  query = SoundCloudQuery.query( { tags: tag } );
 
-		
-	  query = SoundCloudQuery.query({});
-		query.getNextPage().then(function(results){
-			$scope.tags =  filterTags(results);;
-		 	$ionicLoading.hide();
-	 	});
-	 	
+	  query.getNextPage().then(function(results){
+			$scope.results =  results;
+			$scope.$broadcast('scroll.infiniteScrollComplete');
+  		$ionicLoading.hide();
+
+  		$scope.showList = true;
+    	if(results.length > 0){
+  			$scope.hasSearchResults = true;
+				idle = true;
+			}else{
+				$scope.hasSearchResults = false;
+			}
+  	});  
 	}
 
-	filterTags = function(results){
-		var cleanTags = [];
-		var temp;
-		
+	function init(){
+		$ionicLoading.show();
+		prepareModal();
 
-		angular.forEach(results, function(item){
-				
-				if(item.tag_list != null){
-						temp = item.tag_list.split(" ");
-						angular.forEach(temp, function(tag){
-							tag = tag.trim();
-							if(tag.indexOf("soundcloud:") < 0 && tag != ""){
-								cleanTags.push(tag.replace('"',''));	
-							}
-						})
-				}
-		})	
-		cleanTags = _.uniq(cleanTags);
-		return cleanTags;
+		if($stateParams.tag){
+			$scope.showList = true;
+			//if I have the tag..
+			$scope.title = $stateParams.tag;
+			$scope.searchByTag($stateParams.tag.toLowerCase());	
+		}else{
+			$scope.title = 'Browse';
+			$scope.showList = false;
+			query = SoundCloudQuery.query({});
+			query.getNextPage().then(function(results){
+				$scope.tags =  Utils.filterTags(results);;
+		 		$ionicLoading.hide();
+	 		});	
+		}
+		
+		//$scope.endOfRecords = false;
+		//$scope.hasSearchResults = false;
+		$ionicLoading.show();
 	}
 
-	
-
-
-
-	
-
+	init();
 }]);

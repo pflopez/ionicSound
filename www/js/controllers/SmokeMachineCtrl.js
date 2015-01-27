@@ -36,6 +36,8 @@ function( $scope ,  $ionicLoading  ,  SoundCloudQuery  ,  $ionicModal ,  $moment
 
   $scope.closeModal = function(){
     $scope.modal.hide();  
+    //clear info
+    $scope.info = null; 
   }
 
 

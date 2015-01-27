@@ -39,9 +39,8 @@ angular.module('starter', ['ionic','angular-momentjs'])
       }
     }
   })
-
   .state('app.browse', {
-    url: "/browse",
+    url: "/browse/:tag",
     views: {
       'menuContent': {
         templateUrl: "templates/browse.html",
@@ -49,25 +48,14 @@ angular.module('starter', ['ionic','angular-momentjs'])
       }
     }
   })
-    .state('app.smokemachine', {
-      url: "/smokemachine",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/smokemachine.html",
-          controller: 'SmokeMachineCtrl'
-        }
+  .state('app.smokemachine', {
+    url: "/smokemachine",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/smokemachine.html",
+        controller: 'SmokeMachineCtrl'
       }
-    });
-
-  // .state('app.single', {
-  //   url: "/playlists/:playlistId",
-  //   views: {
-  //     'menuContent': {
-  //       templateUrl: "templates/playlist.html",
-  //       controller: 'PlaylistCtrl'
-  //     }
-  //   }
-  // });
-  // if none of the above states are matched, use this as the fallback
+    }
+  });
   $urlRouterProvider.otherwise('/app/search');
 });
