@@ -20,7 +20,7 @@
     <script src="lib/loDash/loDash.js"></script>
     <script src="lib/moment/moment.js"></script>
     <script src="lib/angular-momentjs/angular-momentjs.js"></script>
-
+    <script src="lib/plangular/ng-plangular.js"></script>
 
     <script src="http://connect.soundcloud.com/sdk.js"></script>
     
@@ -37,6 +37,7 @@
     <script src="js/controllers/SmokeMachineCtrl.js"></script>
     <script src="js/controllers/SearchCtrl.js"></script>
     <script src="js/controllers/BrowseCtrl.js"></script>
+    <script src="js/controllers/MiniPlayerCtrl.js"></script>
     
  
     <script src="js/services/Utils.js"></script>
@@ -50,5 +51,6 @@
 
   <body ng-app="starter">
     <ion-nav-view></ion-nav-view>
+    <div ng-include="'templates/mini-player.html'"></div>
   </body>
 </html>

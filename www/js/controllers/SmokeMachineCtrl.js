@@ -1,11 +1,11 @@
 angular.module('starter')
 .controller('SmokeMachineCtrl', 
        [ '$scope', '$ionicLoading' , 'SoundCloudQuery' , '$ionicModal', '$moment',
-function( $scope ,  $ionicLoading  ,  SoundCloudQuery  ,  $ionicModal ,  $moment) {
+function( $scope ,  $ionicLoading  ,  SoundCloudQuery  ,  $ionicModal ,  $moment ) {
 
   var idle = true;
   var query =  SoundCloudQuery.queryByUser({user : '981755'});
-
+  
   
   
 
@@ -30,17 +30,17 @@ function( $scope ,  $ionicLoading  ,  SoundCloudQuery  ,  $ionicModal ,  $moment
 
     result.big_artwork = result.artwork_url.replace('large', 't500x500');
     result.proper_time = $moment.utc(result.duration).format("HH:mm:ss");
-
     $scope.modal.show();
+    $scope.loaded = true; 
+    
   }
 
   $scope.closeModal = function(){
     $scope.modal.hide();  
+    $scope.loaded = false; 
     //clear info
     $scope.info = null; 
   }
-
-
 
   $scope.loadMore = function (){
     if(idle){
