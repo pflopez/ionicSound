@@ -32,15 +32,19 @@ plangular.directive('plangular', ['$http', 'plangularConfig', function ($http, p
     duration: 0,
 
     load: function(track, index) {
-      this.tracks[index] = track;
+      //this.tracks[index] = track;
+      this.tracks[0] = track;
+      index = 0; // added, remove
       if (!this.playing && !this.i && index == 0) {
         this.currentTrack = this.tracks[0];
       }
     },
 
     play: function(index, playlistIndex) {
+     
       this.i = index || 0;
-      var track = this.tracks[this.i];
+      //var track = this.tracks[this.i];
+      var track = this.tracks[0];
       if (track.tracks) {
         this.playlistIndex = playlistIndex || 0;
         this.playing = track.tracks[this.playlistIndex];
@@ -60,8 +64,10 @@ plangular.directive('plangular', ['$http', 'plangularConfig', function ($http, p
     },
 
     playPause: function(i, playlistIndex) {
-      var track = this.tracks[i];
-      if (track.tracks && this.playing != track.tracks[playlistIndex]) {
+      //var track = this.tracks[i];
+      //if (track.tracks && this.playing != track.tracks[playlistIndex]) {
+      var track = this.tracks[0];
+      if (track && track.tracks && this.playing != track.tracks[playlistIndex]) {
         this.play(i, playlistIndex);
       } else if (!track.tracks && this.playing != track) {
         this.play(i);
@@ -157,7 +163,7 @@ plangular.directive('plangular', ['$http', 'plangularConfig', function ($http, p
         scope.track = player.data[src];
         addKeys(scope.track);
       } else {
-        $http.jsonp('//api.soundcloud.com/resolve.json', { params: params }).success(function(data){
+        $http.jsonp('http://api.soundcloud.com/resolve.json', { params: params }).success(function(data){
           scope.track = data;
           addKeys(scope.track);
           player.data[src] = data;
@@ -280,7 +286,7 @@ plangular.filter('prettyTime', function() {
 });
 
 plangular.provider('plangularConfig', function() {
-  this.clientId = '0d33361983f16d2527b01fbf6408b7d7';
+  this.clientId = 'a3c640eb93a579e2fb97438a287aff52';
   var _this = this;
   this.$get = function() {
     return {

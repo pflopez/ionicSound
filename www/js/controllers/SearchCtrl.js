@@ -29,12 +29,14 @@ function( $scope,   $ionicLoading,   SoundCloudQuery,   $ionicModal,   $moment) 
 		result.proper_time = $moment.utc(result.duration).format("HH:mm:ss");
 
 		$scope.modal.show();
+		$scope.loaded = true;
 	}
 
 	$scope.closeModal = function(){
-		$scope.modal.hide();	
-		//clear info
-		$scope.info = null;	
+		$scope.modal.hide();  
+    $scope.loaded = false; 
+    //clear info
+    $scope.info = null; 
 	}
 
 

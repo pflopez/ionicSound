@@ -12,7 +12,7 @@ body {
 	font-family: 'Roboto Slab', serif;
 }
 
-.bar .title {
+.bar .title , h2 , h3{
 font-family: 'Roboto Slab', serif;
 font-weight:bold;	
 }
@@ -22,6 +22,31 @@ font-weight:bold;
 	background: #f0f0f0;
 	height: 100%;
 }
+
+
+.player-container {
+	@include display-flex;
+	@include align-items(center);
+	padding:10px;
+
+	.player-controls {
+		font-size: 40px;
+		width: 50px;
+		text-align: center;
+	}	
+
+	.player-title {
+		@include flex;
+		h3 {
+			margin:0	;
+			margin-left: 10px;
+		}
+		
+	}
+}
+
+
+
 
 /*
 directives

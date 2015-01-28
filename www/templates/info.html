@@ -11,16 +11,12 @@
 	<ion-content>
 		<div class="list card">
 
-<div ng-if="loaded" class="table" plangular="{{info.permalink_url}}">
-  <div class="table-cell">
-    <button class="button-icon" ng-click="playPause()">
-    	play
-      <svg ng-if="player.playing != track" plangular-icon="play"></svg>
-      <svg ng-if="player.playing == track" plangular-icon="pause"></svg>
-    </button>
+<div ng-if="loaded" plangular="{{info.permalink_url}}" class="player-container" ng-click="playPause()" >
+  <div class="player-controls button-icon" 
+    ng-class="{'ion-play' : (player.playing != track) , 'ion-stop' : (player.playing == track)}">
   </div>
-  <div class="table-cell px2 full-width">
-    <h3 class="m0">{{ user.username }} - {{ title }}</h3>
+  <div class="player-title">
+    <h3>{{ title }}</h3>
   </div>
 </div>
 
