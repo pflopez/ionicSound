@@ -31,7 +31,7 @@ function( $scope ,  $ionicLoading  ,  SoundCloudQuery  ,  $ionicModal ,  $moment
     result.big_artwork = result.artwork_url.replace('large', 't500x500');
     result.proper_time = $moment.utc(result.duration).format("HH:mm:ss");
     
-    $scope.modal.show();
+    //$scope.modal.show();
     $scope.loaded = true; 
     
   }

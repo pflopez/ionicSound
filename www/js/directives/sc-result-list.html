@@ -1,0 +1,22 @@
+<div >
+	<ion-list>
+    <ion-item collection-repeat="result in results"
+		collection-item-width="'100%'"
+		collection-item-height="134"
+		class='item-list'
+		ng-click="resultClick(result)">
+		
+      <sc-result-entry track="result"></sc-result-entry>
+
+    </ion-item>
+  </ion-list>
+
+	<ion-infinite-scroll
+	  on-infinite="loadMoreRecords()"
+	  distance="5%"
+	  icon="ion-loading-c"
+	  class="scroll-loading"
+	  ng-if="hasSearchResults">
+	</ion-infinite-scroll>
+	 
+</div>

@@ -1,10 +1,16 @@
 
 .delete-query {
-	position: absolute;
-	right: 59px;
+	font-size: 20px;
+	text-align: center;
+
+	padding-left: 12px;
 }
 
-
+.button-search {
+	@include default-font;
+	font-size: 16px;
+	font-weight: bold;
+}
 
 .container {
 	padding: 20px 10px;

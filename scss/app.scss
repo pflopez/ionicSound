@@ -8,13 +8,18 @@
   src: local('Roboto Slab Regular'), local('RobotoSlab-Regular'), url(../fonts/roboto.woff) format('woff');
 }
 
+@mixin default-font {
+	font-family: 'Roboto Slab', serif;
+	font-weight:bold;	
+}
+
+
 body {
 	font-family: 'Roboto Slab', serif;
 }
 
 .bar .title , h2 , h3{
-font-family: 'Roboto Slab', serif;
-font-weight:bold;	
+	@include default-font;
 }
 
 .full-image {
@@ -22,6 +27,7 @@ font-weight:bold;
 	background: #f0f0f0;
 	height: 100%;
 }
+
 
 
 .player-container {

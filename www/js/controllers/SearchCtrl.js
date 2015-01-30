@@ -1,86 +1,65 @@
 angular.module('starter')
 .controller('SearchCtrl', 
-				['$scope', '$ionicLoading', 'SoundCloudQuery', '$ionicModal', '$moment',
-function( $scope,   $ionicLoading,   SoundCloudQuery,   $ionicModal,   $moment) {
-	var idle 	= false;
+				['$scope', '$ionicLoading', 'SoundCloudQuery', '$ionicModal', '$moment', 'KeyboardService',
+function( $scope,   $ionicLoading,   SoundCloudQuery,   $ionicModal,   $moment ,  KeyboardService ) {
+	
 	var query;
+	//$scope.query = {};
 	//init the controller
 	init();
 	
+	/**
+	 * init
+	 * @return {[type]} [description]
+	 */
 	function init(){
+	
 
-		$scope.query = {};
-		$scope.hasSearchResults = false;
-
-			  // Create the login modal that we will use later
+	  // Create the login modal that we will use later
 	  $ionicModal.fromTemplateUrl('templates/info.html', {
 	    scope: $scope
 	  }).then(function(modal) {
 	    $scope.modal = modal;
 	  });
-
-
 	}
 
-	$scope.resultClick = function(result){
-		$scope.info = result;
-
-		result.big_artwork = result.artwork_url.replace('large', 't500x500');
-		result.proper_time = $moment.utc(result.duration).format("HH:mm:ss");
-
-		$scope.modal.show();
-		$scope.loaded = true;
-	}
-
-	$scope.closeModal = function(){
-		$scope.modal.hide();  
-    $scope.loaded = false; 
-    //clear info
-    $scope.info = null; 
-	}
-
-
+	/**
+	 * Clearing query
+	 * @return {[type]} [description]
+	 */
 	$scope.clearQuery = function(){
 		$scope.query.value = null;
 	}
 
 	/**
-	 * Makes initial search
+	 * Search action
+	 * @param  {[type]} so [description]
+	 * @return {[type]}    [description]
 	 */
-	$scope.search = function(){
+	$scope.search = function(so){
+		KeyboardService.hide();
 		$ionicLoading.show();
-	  query =  SoundCloudQuery.query({q:$scope.query.value});
+	  query =  SoundCloudQuery.query({q:so.query});
 		query.getNextPage().then(function(results){
-			$scope.results =  results;
-			$scope.$broadcast('scroll.infiniteScrollComplete');
+			$scope.results = results;
   		$ionicLoading.hide();
-    	if(results.length > 0){
-  			$scope.hasSearchResults = true;
-				idle = true;
-			}else{
-				$scope.hasSearchResults = false;
-			}
-  	});  
-    
+  	});    
 	};
 
 	/**
 	 * Loads more results
 	 * @return {[type]}
 	 */
-	$scope.loadMore = function(){
-		if(idle){
-			idle = false;
-			query.getNextPage().then(function(results){
-				$scope.results = $scope.results ? $scope.results.concat(results) : results;
-				$scope.$broadcast('scroll.infiniteScrollComplete');
-				if(results.length > 0){
-					idle = true;
-				}else{
-					$scope.hasSearchResults = false;
-				}
-			});  
-		}
-	}
+	$scope.loadMore = function(){	
+		console.log("wyy");
+		
+		return query.getNextPage().then(function(results){
+			$scope.results = $scope.results ? $scope.results.concat(results) : results;
+			return results;
+		});  
+		
+	};
+
+
 
 }]);

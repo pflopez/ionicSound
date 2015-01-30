@@ -7126,8 +7126,15 @@ directives
     font-family: 'Roboto Slab', serif; }
 
 .delete-query {
-  position: absolute;
-  right: 59px; }
+  font-size: 20px;
+  text-align: center;
+  padding-left: 12px; }
+
+.button-search {
+  font-family: 'Roboto Slab', serif;
+  font-weight: bold;
+  font-size: 16px;
+  font-weight: bold; }
 
 .container {
   padding: 20px 10px; }

@@ -11,12 +11,12 @@
 	<ion-content>
 		<div class="list card">
 
-<div ng-if="loaded" plangular="{{info.permalink_url}}" class="player-container" ng-click="playPause()" >
+<div ng-if="loaded" plangular="{{::info.permalink_url}}" class="player-container" ng-click="playPause()" >
   <div class="player-controls button-icon" 
     ng-class="{'ion-play' : (player.playing != track) , 'ion-stop' : (player.playing == track)}">
   </div>
   <div class="player-title">
-    <h3>{{ title }}</h3>
+    <h3>{{ ::title }}</h3>
   </div>
 </div>
 
@@ -24,23 +24,23 @@
 
 			<div class="item item-avatar">
 				<img class="track__img" ng-src="{{info.user.avatar_url }}">
-				<h2>{{info.user.username}}</h2>
-				<p>{{info.user.permalink_url}}</p>
+				<h2>{{::info.user.username}}</h2>
+				<p>{{::info.user.permalink_url}}</p>
 			</div>
 
 			<div class="item item-body">
 				<img class="full-image" ng-src="{{info.big_artwork}}">
-				<p>{{info.description}}</p>
+				<p>{{::info.description}}</p>
 			</div>
 
 			<div class="item tabs tabs-secondary tabs-icon-left">
 				<a class="tab-item" href="#">
 					<i class="icon ion-thumbsup"></i>
-					{{info.favoritings_count}} Favs
+					{{::info.favoritings_count}} Favs
 				</a>
 				<a class="tab-item" href="#">
 					<i class="icon ion-clock"></i>
-					{{info.proper_time}}
+					{{::info.proper_time}}
 				</a>
 			</div>
 		</div>

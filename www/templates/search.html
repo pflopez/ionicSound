@@ -1,37 +1,15 @@
 <ion-view view-title="Search">
+
   <ion-content>
-		<div  class="item item-input-inset">
-	  		<label class="item-input-wrapper">
-			    <i class="icon ion-ios7-search placeholder-icon"></i>
-			    <input type="search" placeholder="Search" ng-model="query.value">
-			  </label>
+		<form ng-submit="search(this)" class="item item-input-inset">
+  		<label class="item-input-wrapper">
+		    <i class="icon ion-ios7-search placeholder-icon"></i>
+		    <input type="search" placeholder="Search" name="query" ng-model="query">
+		  </label>
+			<button class="button-small button-clear ion-close-round" 	></button>
+		</form>
+		
 
-				<button class="button button-small button-clear delete-query" ng-click="clearQuery()">X</button>
- 				<button class="button button-small  button-clear" ng-click="search()"> GO</button>
-			
-		</div>
-
-		<div>
-			<ion-list>
-	      <ion-item collection-repeat="result in results"
-	        collection-item-width="'100%'"
-	        collection-item-height="134"
-	        class='item-list'
-	        ng-click="resultClick(result)">
-						
-	        <sc-track track="result"></sc-track>
-	      </ion-item>
-	    </ion-list>
-
-	   <ion-infinite-scroll
-	    on-infinite="loadMore()"
-	    distance="10%"
-	    icon="ion-loading-c"
-	    class="scroll-loading"
-	    ng-if="hasSearchResults">
-
-	  </ion-infinite-scroll>
-			 
-		</div>
+		<sc-result-list results="results" load-more="loadMore()"></sc-result-list>
   </ion-content>
 </ion-view>
