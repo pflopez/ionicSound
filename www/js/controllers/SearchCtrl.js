@@ -51,8 +51,6 @@ function( $scope,   $ionicLoading,   SoundCloudQuery,   $ionicModal,   $moment ,
 	 * @return {[type]}
 	 */
 	$scope.loadMore = function(){	
-		console.log("wyy");
-		
 		return query.getNextPage().then(function(results){
 			$scope.results = $scope.results ? $scope.results.concat(results) : results;
 			return results;

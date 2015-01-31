@@ -49,19 +49,6 @@ function( $scope,   $ionicLoading,   SoundCloudQuery,   $ionicModal,   $moment ,
 				$scope.hasSearchResults = false;
 			}
 		});
-
-		// if(idle){
-		// 	$scope.canLoadMore = false;
-		// 	query.getNextPage().then(function(results){
-		// 		$scope.results = $scope.results ? $scope.results.concat(results) : results;
-		// 		$scope.$broadcast('scroll.infiniteScrollComplete');
-		// 		if(results.length > 0){
-		// 			$scope.canLoadMore = true;
-		// 		}else{
-		// 			$scope.hasSearchResults = false;
-		// 		}
-		// 	});  
-		// }
 	};
 
 
@@ -73,7 +60,5 @@ function( $scope,   $ionicLoading,   SoundCloudQuery,   $ionicModal,   $moment ,
 				unbindWatcher();
 			}
 	});
-
 	
-
 }]);

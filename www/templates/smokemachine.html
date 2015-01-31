@@ -1,24 +1,5 @@
 <ion-view view-title="SMOKE MACHINE">
   <ion-content>
-
-   <ion-list>
-      <ion-item collection-repeat="track in tracks"
-        collection-item-width="'100%'"
-        collection-item-height="134"
-        class='item-list'
-        ng-click="resultClick(track)">
-        <sc-result-entry track="track"></sc-result-entry >
-      </ion-item>
-    </ion-list>
-
-   <ion-infinite-scroll
-    on-infinite="loadMore()"
-    distance="10%"
-    icon="ion-loading-c"
-    class="scroll-loading"
-    ng-if="hasSearchResults">
-
-  </ion-infinite-scroll>
-
+   <sc-result-list results="tracks" load-more="loadMore()"></sc-result-list>
   </ion-content>
 </ion-view>

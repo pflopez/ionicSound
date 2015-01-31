@@ -8,15 +8,7 @@
 
 		<!-- result list (tracks) -->
 		<div ng-if='showList'>
-			<ion-list>
-		  <ion-item collection-repeat="result in results"
-		    	collection-item-width="'100%'"
-		    	collection-item-height="134"
-		    	class='item-list'
-		    	ng-click="resultClick(result)">
-		    <sc-track track="result"></sc-track>
-		  </ion-item>
-		</ion-list>
+			<sc-result-list results="results" load-more="loadMore()"></sc-result-list>
 		</div>
 		
    
