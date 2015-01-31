@@ -1,4 +1,4 @@
-angular.module('starter').
+angular.module('ionicSound').
 factory('Utils',
 function(){
 	

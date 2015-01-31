@@ -1,7 +1,7 @@
-angular.module('starter').
+angular.module('ionicSound').
 factory('SoundCloudService', 
-	      ['$http', '$q',
-function( $http,   $q ){
+	      ['$http', '$q', '$log' ,
+function( $http,   $q , $log){
 	
 
 	/**
@@ -52,9 +52,14 @@ function( $http,   $q ){
       method: 'GET',
       url: 'http://api.soundcloud.com/tracks.json',
       params: options
-    }).success(function(data){
+    })
+    .success(function(data){
 	  	deferred.resolve(data);
     })
+    .error(function(reason){
+    	$log.info("error!", reason);
+    	deferred.reject(reason);
+    });
 		return deferred.promise;
 	}
 
@@ -81,6 +86,10 @@ function( $http,   $q ){
     }).success(function(data){
     	deferred.resolve(data);
     })
+    .error(function(reason){
+    	$log.info("error!", reason);
+    	deferred.reject(reason);
+    });
 		return deferred.promise;
 	}
 }]);

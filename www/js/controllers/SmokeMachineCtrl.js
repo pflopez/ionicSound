@@ -1,4 +1,4 @@
-angular.module('starter')
+angular.module('ionicSound')
 .controller('SmokeMachineCtrl', 
        [ '$scope', '$ionicLoading' , 'SoundCloudQuery' , '$ionicModal', '$moment',
 function( $scope ,  $ionicLoading  ,  SoundCloudQuery  ,  $ionicModal ,  $moment ) {

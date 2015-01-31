@@ -1,4 +1,4 @@
-angular.module('starter')
+angular.module('ionicSound')
 .controller('BrowseCtrl', 
 				['$scope', '$ionicLoading', 'SoundCloudQuery', 'Utils', '$stateParams', '$ionicModal', '$moment',
 function( $scope,   $ionicLoading,   SoundCloudQuery,   Utils ,  $stateParams ,  $ionicModal,   $moment ) {

@@ -1,4 +1,4 @@
-angular.module('starter')
+angular.module('ionicSound')
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   // Form data for the login modal
   $scope.loginData = {};

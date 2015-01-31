@@ -1,5 +1,5 @@
 
-angular.module('starter')
+angular.module('ionicSound')
 .directive('scResultList', function() {
   return {
     restrict: 'E',
@@ -8,7 +8,7 @@ angular.module('starter')
       results:  '=',
       loadMore: '&?' 
     },
-    templateUrl: 'js/directives/sc-result-list.html',
+    templateUrl: 'js/directives/scResultList/sc-result-list.html',
     controller: 'scResultListCtrl'
   };
 });
