@@ -16,12 +16,15 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
         'www/lib/ionic/js/ionic.bundle.js',
+        "www/lib/ng-cordova/dist/ng-cordova.js",
         'www/lib/loDash/loDash.js',
         'www/lib/angular-mocks/*',
         "www/lib/moment/moment.js",
         "www/lib/angular-momentjs/angular-momentjs.js",
+        "www/lib/plangular/ng-plangular.js",
         'test/**/',
-        'www/js/**/'
+        'www/js/app.js',
+        'www/js/services/**'
     ],
 
 

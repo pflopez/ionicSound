@@ -5,7 +5,7 @@ describe("SoundCloudService", function() {
 	var $scope, $httpBackend, SoundCloudService;
 	beforeEach(function(){
 		module('ngMock');	
-		module('starter');	
+		module('ionicSound');	
 
 		inject(function(_$rootScope_, _$httpBackend_ ,_SoundCloudService_) {
 	    $scope = _$rootScope_.$new();    
